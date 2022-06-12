@@ -25,11 +25,12 @@ def merge_sort(lst, left, right):
 
 
 if __name__ == '__main__':
-    n = eval(input())
+    n = int(input())
     while n > 0:
         lst = []
         for i in range(n):
             m = int(input())
             lst.append(m)
         print(merge_sort(lst, 0, n - 1))
-        n = eval(input())
+        n = int(input())
+
