@@ -4,6 +4,14 @@ Given an odd number of cows N (1 <= N < 10,000) and their milk output (1..1,000,
 Input
 * Line 1: A single integer N
 * Lines 2..N+1: Each line contains a single integer that is the milk output of one cow.
+
+ * 解题方法：求一组数据的中位数，对该组数据进行排序，求出中位数
+ *
+ * 出错次数：0
+ *
+ * 错误原因 （可选）：
+ *
+ * 心得体会 （可选）：这道题虽然花了少时间，但是还是有收获的，debug能力在不断提升
 */
 
 #include<iostream>
