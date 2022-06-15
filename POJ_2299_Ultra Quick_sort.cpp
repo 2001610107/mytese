@@ -1,3 +1,18 @@
+
+/*
+ * 问题描述：The input contains several test cases. Every test case begins with a line that contains a single integer n < 500,000 -- the length of the input sequence.
+ Each of the the following n lines contains a single integer 0 ≤ a[i] ≤ 999,999,999, the i-th input sequence element.
+ Input is terminated by a sequence of length n = 0. This sequence must not be processed.
+ * 解题方法：使用归并排序算法，分而治之，不断将数组从中间位置分开（二分法），将整个数组的排序问题转化为子数组的排序问题。
+ *当划分到子数组的长度为1时，开始向上合并，不断将已排序子数组合并。合并两个排序数组的过程中，而每当遇到左子数组当前元素 > 右子数组当前元素时，
+ *意味着 「左子数组当前元素 至 末尾元素」 与 「右子数组当前元素」 构成了若干 「逆序对」 
+ *考虑在归并排序的合并阶段统计「逆序对」数量，完成归并排序时，也随之完成所有逆序对的统计。
+ * 出错次数：3
+ *
+ * 错误原因 （可选）：对数据长度使用不够熟悉
+ *
+ * 心得体会 （可选）：这道题虽然花了不少时间，但是还是有收获的，debug能力在不断提升
+ */
 #include<iostream>
 #define MAX 500001
 using namespace std;
