@@ -1,8 +1,10 @@
 
-/*
- * 问题描述：The input contains several test cases. Every test case begins with a line that contains a single integer n < 500,000 -- the length of the input sequence.
- Each of the the following n lines contains a single integer 0 ≤ a[i] ≤ 999,999,999, the i-th input sequence element.
- Input is terminated by a sequence of length n = 0. This sequence must not be processed.
+/** 问题描述：给出长度为n的序列，每次只能交换相邻的两个元素，至少要交换几次才使得该序列为递增序列。
+ *
+ * 提交状态： AC 
+ *
+ * AC 结果： Memory: 7268K Time: 1313MS
+ 
  * 解题方法：使用归并排序算法，分而治之，不断将数组从中间位置分开（二分法），将整个数组的排序问题转化为子数组的排序问题。
  *当划分到子数组的长度为1时，开始向上合并，不断将已排序子数组合并。合并两个排序数组的过程中，而每当遇到左子数组当前元素 > 右子数组当前元素时，
  *意味着 「左子数组当前元素 至 末尾元素」 与 「右子数组当前元素」 构成了若干 「逆序对」 
