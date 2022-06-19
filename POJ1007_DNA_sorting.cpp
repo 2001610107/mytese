@@ -1,11 +1,11 @@
 /*
- * 问题描述：One measure of ``unsortedness'' in a sequence is the number of pairs of entries that are out of order with respect to each other. For instance, 
- *in the letter sequence ``DAABEC'', this measure is 5, since D is greater than four letters to its right and E is greater than one letter to its right. 
- *This measure is called the number of inversions in the sequence. The sequence ``AACEDGG'' has only one inversion (E and D)---it is nearly sorted---while the sequence ``ZWQM'' has 6 inversions (it is as unsorted as can be---exactly the reverse of sorted).
- *You are responsible for cataloguing a sequence of DNA strings (sequences containing only the four letters A, C, G, and T).
- *However, you want to catalog them, not in alphabetical order, but rather in order of ``sortedness'', from ``most sorted'' to ``least sorted''. All the strings are of the same length.
+ * 问题描述：输入长度为n的m个字符串，每个字符串由A，C，G，T组成。按照每个字符串的逆序数大小一次输出每个字符串。
  *
  * 解题方法：“most sorted”是指逆序数最小；相反，“least sorted”是指逆序数最大；每输入一行字符串就统计该行字符串的逆序数，以逆序数由小到大进行排序输出。
+ *
+ * 提交状态： AC .
+ *
+ * AC 结果： Memory: 212K Time: 47MS
  *
  * 出错次数：5
  *
