@@ -1,3 +1,21 @@
+/*
+ * 问题描述：
+ *
+ * 提交状态： AC 
+ *
+ * AC 结果： Memory: 244K Time: 16MS
+ *
+ * 解题方法1：
+ *
+ * 解题方法2 （可选）：
+ *
+ * 出错次数：7
+ *
+ * 错误原因 （可选）：
+ *
+ * 心得体会 （可选）：
+ */
+
 #include<iostream>
 #define maxn 27
 using namespace std;
@@ -8,8 +26,8 @@ struct path {
 bool used[maxn][maxn];
 bool success = false;
 int q, p;
-int dx[8] = { -1,1,-2,2,-2,2,-1,1 };///xΪ������������
-int dy[8] = { -2,-2,-1,-1,1,1,2,2 };///yΪ������������
+int dx[8] = { -1,1,-2,2,-2,2,-1,1 };///x为行数，纵坐标
+int dy[8] = { -2,-2,-1,-1,1,1,2,2 };///y为列数，横坐标
 void dfs(int x, int y, int num)
 {
 	path[num].x = x;
@@ -26,7 +44,7 @@ void dfs(int x, int y, int num)
 		if (nx >= 1 && nx <= p && ny >= 1 && ny <= q && !used[nx][ny] && !success) {
 			used[nx][ny] = true;
 			dfs(nx, ny, num + 1);
-			//����ʧ��,��ǰλ�õķ��ʱ��Ҫ���false
+			//搜索失败,当前位置的访问标记要变回false
 			used[nx][ny] = false;
 		}
 	}
