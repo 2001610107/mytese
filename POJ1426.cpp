@@ -15,7 +15,8 @@
  *
  * 心得体会 （可选）：对宽度优先搜索有进一步认识
  */
-方法1：#include<iostream>
+方法1：
+#include<iostream>
 using namespace std;
 int n;
 long long now, q[1000000]; 
@@ -47,7 +48,40 @@ int main()
 	}
 	return 0;
 }
-方法2：
+方法2：（超出时间限制）
+#include<iostream>
+#include<queue>
+#define ll long long
+using namespace std;
+void BFS(int n)
+{
+	queue<ll>q;
+	q.push(1);
+	while(!q.empty())
+	{
+		ll x = q.front();
+			q.pop();
+			if(x%n==0)	
+			{
+				cout << x<<endl;
+				return;
+			}
+			q.push(x * 10);
+			q.push(x * 10 + 1);
+	}
+
+}
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		if(n==0)
+			break;
+		BFS(n);
+	}
+}
+方法3：
 #include "iostream"
 #define ll long long
 using namespace std;
