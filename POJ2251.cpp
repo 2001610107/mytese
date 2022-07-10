@@ -1,6 +1,21 @@
+
 /*
-测试运行成功但没有通过
-*/
+ * 问题描述：一个有许多障碍物的3D的迷宫，给起点和终点，问你是否能从起点走到终点，如果能最快要几分钟（移动一步一分钟）；能够走到输出时间，否则输出Trapped。
+ *
+ * 提交状态： AC.
+ *
+ * AC 结果： Memory: 378K Time: 47MS
+ *
+ * 解题方法1：进行三维（六个方向）的bfs，一层层往外搜，遇到终止条件就结束搜索。
+ *
+ * 解题方法2 （可选）：
+ *
+ * 出错次数：3
+ *
+ * 错误原因 （可选）：
+ *
+ * 心得体会 （可选）：
+ */
 
 
 #include<iostream>
@@ -36,7 +51,7 @@ int BFS(node start)
 			new_node.y = temp.y + dir[i][1];
 			new_node.z = temp.z + dir[i][2];
 			new_node.step = temp.step + 1;
-			if (!used[new_node.x][new_node.y][new_node.z] && new_node.x >= 1 && new_node.x <= L && new_node.y >= 1 && new_node.y << R && new_node.z >= 1 && new_node.z << C && map[new_node.x][new_node.y][new_node.z] != '#')
+			if (!used[new_node.x][new_node.y][new_node.z] && new_node.x >= 1 && new_node.x <= L && new_node.y >= 1 && new_node.y <=R && new_node.z >= 1 && new_node.z <= C && map[new_node.x][new_node.y][new_node.z] != '#')
 			{
 				used[new_node.x][new_node.y][new_node.z] = 1;
 				if (map[new_node.x][new_node.y][new_node.z] == 'E')
