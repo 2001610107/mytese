@@ -1,3 +1,8 @@
+/*
+测试运行成功但没有通过
+*/
+
+
 #include<iostream>
 #include<queue>
 #include<cstring>
@@ -13,8 +18,8 @@ typedef struct {
 	int step;
 
 }node;
-node S; //���
-node E;  //�յ�
+node S; //Æðµã
+node E;  //ÖÕµã
 
 int BFS(node start)
 {
