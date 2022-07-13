@@ -1,150 +1,150 @@
 #include<iostream>
+
 #include<queue>
 #include<cstring>
-#define maxn 101
-using namespace std;
+#include<stack>
 
+using namespace std;
 int a, b, c;
-bool used[maxn][maxn];
+int count;
+bool used[101][101];
 struct node {
-	int a, b,count;
-	char path[maxn];//操作流程
-	int plen;
+    int x, y;
+    int step;
+    int flag;
+    node *pre;
 };
-string path[] = {
-	"FILL(1)",
-	"FILL(2)",
-	"DROP(1)",
-	"DROP(2)",
-	"POUR(1,2)",
-	"POUR(2,1)"
-};//六种操作，装满第一个壶、装满第二个壶、清空第一个壶、清空第二个壶、把第一个壶的水倒到第二个壶、把第二个壶的水倒到第一个壶
-void print_result(int count, char p[], int n)
-{
-	cout << count << endl;
-	for (int i = 0; i < n; i++)
-	{
-		cout << path[(int)p[i]] << endl;
-	}
+queue<node> q;
+stack<int> r;
+
+void bfs(int x, int y) {
+    node now;
+    node pot[300];
+    now.x = now.y = now.flag = now.step = 0;
+    now.pre = NULL;
+    q.push(now);
+    used[x][y] = 1;
+    int cnt = -1;
+    while (!q.empty()) {
+        cnt++;
+        pot[cnt] = q.front();
+        q.pop();
+        for (int i = 1; i <= 6; i++) {
+            switch(i)
+            {
+                case 1:   //FILL(1)
+                        now.x = a;
+                        now.y = pot[cnt].y;
+                        now.flag = 1;
+                        break;
+                case 2://FILL(2)
+                        now.y = b;
+                        now.x = pot[cnt].x;
+                        now.flag = 2;
+                        break;
+                case 3://DROP(1)
+                    now.x = 0;
+                now.y = pot[cnt].y;
+                now.flag = 3;
+                break;
+
+                case 4://DROP(2)
+                now.x=pot[cnt].x;
+                now.y=0;
+                now.flag=4;
+                break;
+                case 5://POUR(1,2)
+                    if(pot[cnt].x > b-pot[cnt].y)
+                    {
+                        now.x = pot[cnt].x-(b-pot[cnt].y);
+                        now.y = b;
+                    }
+                    else
+                    {
+                        now.x = 0;
+                        now.y = pot[cnt].y+pot[cnt].x;
+                    }
+
+                now.flag=5;
+                break;
+                case 6://POUR(2,1)
+                    if(pot[cnt].y > a-pot[cnt].x)
+                    {
+                        now.y = pot[cnt].y - (a-pot[cnt].x);
+                        now.x = a;
+                    }
+                    else
+                    {
+                        now.x = pot[cnt].x+pot[cnt].y;
+                        now.y = 0;
+                    }
+                   now.flag=6;
+                    break;
+            }
+            if(used[now.x][now.y]) continue;
+            used[now.x][now.y]=1;
+            now.step=pot[cnt].step+1;
+            now.pre=&pot[cnt];//璁板綍姝ラ
+            if(now.x==c||now.y==c)
+            {
+                count=now.step;
+                while(now.pre)
+                {
+                    r.push(now.flag);
+                    now=*now.pre;
+                }
+                return;
+            }
+            q.push(now);
+
+        }
+    }
+    count=-1;
+    return;
 }
-void BFS()
-{
-	queue<node>q;
-	memset(used, true, sizeof(used));
-	node pot;
-	pot.a = 0;
-	pot.b = 0;
-	pot.count=0;
-	pot.plen = 0;
-    memset(pot.path, 0, sizeof(pot.path));
-	q.push(pot);
-	used[pot.a][pot.b] = false;
-	while (!q.empty())
-	{
-		pot = q.front();
-		q.pop();
-		if (pot.a == c || pot.b == c)
-		{
-			print_result(pot.count, pot.path, pot.plen);
-			return;
-		}
-		node now;
-		now = pot;
-		now.count++;
-		now.plen++;
-		//第一种操作;FILL(a)
-		if (a - pot.a > 0)
-		{
-			now.a = a;
-			now.b = pot.b;
-			if (used[now.a][now.b])
-			{
-				now.path[pot.plen] = 0;
-				q.push(now);
-				used[now.a][now, b] = false;
-			}
-		}
-		//第二种操作：FILL(b)
-		if (b - pot.b > 0)
-		{
-			now.b= b;
-			now.a = pot.a;
-			if (used[now.a][now.b])
-			{
-				now.path[pot.plen] = 1;
-				q.push(now);
-				used[now.a][now, b] = false;
-			}
-		}
-		//第三种操作：DROP(a)
-		if (pot.a)
-		{
-			now.a = 0;
-			now.b = pot.b;
-			if (used[now.a][now.b])
-			{
-				now.path[pot.plen] = 2;
-				q.push(now);
-				used[now.a][now.b] = false;
-			}
-		}
-		//第四种操作：DROP(b)
-		if (pot.b)
-		{
-			now.b = 0;
-			now.a = pot.a;
-			if (used[now.a][now.b])
-			{
-				now.path[pot.plen] = 3;
-				q.push(now);
-				used[now.a][now.b] = false;
-			}
-		}
-		//第五种操作POUR(a,b)
-		if (pot.a && (pot.b < b))
-		{
-			if (pot.a > (b - pot.b))
-			{
-				now.a=pot.a-(b-pot.b);
-				now.b = b;
-			}
-			else {
-				now.a = 0;
-				now.b = pot.b + pot.a;
-			}
-			if (used[now.a][now.b])
-			{
-				now.path[pot.plen] = 4;
-				q.push(now);
-				used[now.a][now.b] = false;
-			}
-		}
-		//第六种操作:POUR(2,1)
-		if (pot.b && (pot.a < a))
-		{
-			if (pot.b > (a - pot.a))
-			{
-				now.b = pot.b - (a - pot.a);
-				now.a = a;
-			}
-			else {
-				now.b = 0;
-				now.a = pot.a + pot.b;
-			}
-			if (used[now.a][now.b])
-			{
-				now.path[pot.plen] = 5;
-				q.push(now);
-				used[now.a][now.b] = false;
-			}
-		}
-	}
-	cout << "impossible" << endl;
+
+void result_print() {
+    if (count != -1) {
+        cout << count << endl;
+        while (!r.empty()) {
+            int i = r.top();
+            r.pop();
+            switch (i) {
+                case 1:
+                    cout << "FILL(1)" << endl;
+                    break;
+                case 2:
+                    cout << "FILL(2)" << endl;
+                    break;
+                case 3:
+                    cout << "DROP(1)" << endl;
+                    break;
+                case 4:
+                    cout << "DROP(2)" << endl;
+                    break;
+                case 5:
+                    cout << "POUR(1,2)" << endl;
+                    break;
+                case 6:
+                    cout << "POUR(2,1)" << endl;
+                    break;
+            }
+        }
+    } else cout << "impossible" << endl;
 }
-int main()
-{
-	while (cin >> a >> b >> c)
-	{
-      BFS();
+
+int main() {
+    while (cin >> a >> b >> c) {
+        if (a == 0 && b == 0 && c == 0)
+            break;
+        while (!q.empty()) {
+            q.pop();
+        }
+        while (!r.empty()) {
+            r.pop();
+        }
+        memset(used, 0, sizeof(used));
+        bfs(0, 0);
+        result_print();
     }
 }
