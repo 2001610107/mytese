@@ -1,7 +1,7 @@
 /*
  * 问题描述：输入6个数字，分别代表11,22,33,44,55,66规格的箱子的数目，问最少需要多少个6*6的箱子才可以装完所给各种规格的箱子。
  *
- * 提交状态： 未提交
+ * 提交状态： 超出时间限制
  *
  * AC 结果： Memory: K Time: MS
  *
@@ -13,26 +13,24 @@
  * 2*2、1*1：优先放进前面各较大规格箱子空间的剩余，不够的话再用新箱子。
  * 解题方法2 （可选）：
  *
- * 出错次数：
+ * 出错次数：10
  *
- * 错误原因 （可选）：
+ * 错误原因 （可选）：超出时间限制
  *
  * 心得体会 （可选）：
  */
 
 #include<iostream>
 using namespace std;
-
-int main()
+void solution()
 {
     int pack[7];
     int pack1_count, pack2_count;
     int count;
-    while (cin >> pack[1] >> pack[2] >> pack[3] >> pack[4] >> pack[5] >> pack[6]) {
-        if (pack[1] == 0 && pack[2] == 0 && pack[3] == 0 && pack[4] == 0 && pack[5] == 0 && pack[6] == 0)
-        {
-            break;
-        }
+    while (1) {
+    cin >> pack[1] >> pack[2] >> pack[3] >> pack[4] >> pack[5] >> pack[6];
+    if (pack[1] == 0 && pack[2] == 0 && pack[3] == 0 && pack[4] == 0 && pack[5] == 0 && pack[6] == 0)
+        break;
         count = 0;
         count = pack[6] + pack[5] + pack[4] + (pack[3] + 3) / 4;
         pack2_count = 5 * pack[4];
@@ -48,16 +46,19 @@ int main()
         {
             pack2_count += 5;
         }
-        if (pack[2] > pack2_count) {
+        if (pack[2] > pack2_count) 
             count = count + (pack[2] - pack2_count + 8) / 9;
-        }
         pack1_count = 36 * count - 36 * pack[6] - 25 * pack[5] - 16 * pack[4] - 9 * pack[3] - 4 * pack[2];
         if (pack[1] > pack1_count)
-        {
             count = count + (pack[1] - pack1_count + 35) / 36;
-        }
+        
         cout << count << endl;
     }
 
+}
+int main()
+{
+    solution();
     return 0;
 }
+
