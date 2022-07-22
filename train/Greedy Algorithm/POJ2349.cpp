@@ -2,7 +2,6 @@
 #include<algorithm>
 #include<iomanip>
 #include<cmath>
-#include<cstring>
 using namespace std;
 const int maxn = 510, M = maxn * maxn / 2;
 struct Node {
@@ -43,9 +42,7 @@ int main()
 		}
 		for (int i = 1; i <= n; i++)
 		{
-			int x, y;
-			cin >> x >> y;
-			p[i] = { x,y };
+			cin >>p[i].x >> p[i].y;
 		}
 		for (int i = 1; i <= n; i++)
 		{
@@ -73,5 +70,4 @@ int main()
 		}
 		cout << setiosflags(ios::fixed) << setprecision(2) << ans << endl;
  	}
-
 }
