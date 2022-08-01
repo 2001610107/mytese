@@ -15,7 +15,7 @@
  *
  * 心得体会 （可选）：
  */
-
+方法1：prime算法
 #include<iostream>
 #define maxn 30
 #define INF 0X3f3f3f
@@ -72,5 +72,66 @@ int main()
 			}
 		}
 		prim();
+	}
+}
+方法2——kruskal算法
+ * AC 结果： Memory: 224K Time: 16MS
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int N = 80;
+struct node {
+	int from;
+	int to;
+	int weight;
+}map[N];	
+int n;
+int now;
+int pre[30];
+bool cmp(node a, node b)
+{
+	return a.weight < b.weight;
+}
+int finds(int x) {
+	if (pre[x] == x) return pre[x];
+	pre[x] = finds(pre[x]);
+	return pre[x];
+}
+void kruskal()
+{
+	int ans = 0;
+	for (int i = 0; i < 30; i++)
+		pre[i] = i;
+	sort(map, map + now, cmp);//
+	for (int i = 0; i < now; i++)
+	{
+		int from = finds(map[i].from);
+		int to = finds(map[i].to);
+		if (from != to)
+		{
+			pre[from] = to;
+			ans += map[i].weight;
+		}
+	}
+	cout << ans << endl;
+}
+int main()
+{
+	while (cin >> n && n)
+	{    now = 0;
+		for (int i = 0; i < n - 1; i++)
+		{    char x, y;
+		      int k;
+			cin >> x >> k;
+			for (int j = 0; j < k; j++)
+			{
+				int weight;
+				cin >> y >> weight;
+				map[now].from = x - 'A';
+				map[now].to = y - 'A';
+				map[now++].weight = weight;
+			}
+		}
+		kruskal();
 	}
 }
