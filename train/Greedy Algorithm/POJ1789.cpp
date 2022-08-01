@@ -15,7 +15,7 @@
  *
  * 心得体会 （可选）：
  */
-
+方法1——prime算法
 #include<iostream>
 using namespace std;
 typedef long long ll;
@@ -79,5 +79,65 @@ int main()
 			}
 		}
 		prime();
+	}
+}
+方法2——krusal算法
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const  int manx = 2005;
+struct node {
+	int from;
+	int to;
+	int weight;
+}map[manx*(manx>>1)];
+int n,m;
+char str[manx][7];
+int pre[manx];
+bool cmp(node a, node b) {
+	return a.weight < b.weight;
+}
+int finds(int x)
+{
+	return pre[x] == x ? x : finds(pre[x]);
+}
+void krusal()
+{
+	int ans = 0;
+	for (int i = 0; i <= n; i++)
+		pre[i] = i;
+	for (int i = 0; i < m; i++)
+	{
+		int from = finds(map[i].from);
+		int to = finds(map[i].to);
+		if (from != to)
+		{
+			pre[from] = to;
+			ans += map[i].weight;
+		}
+	}
+	cout << "The highest possible quality is 1/" << ans << "." << endl;
+}
+int main()
+{
+	while (cin >> n && n)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			cin >> str[i];
+			for (int j = 0; j < i; j++)
+			{
+				int count = 0;
+				for (int k = 0; k < 7; k++)
+				{
+					if (str[i][k] != str[j][k]) count++;
+				}
+				map[m].from = i;
+				map[m].to = j;
+				map[m++].weight = count;
+			}
+		}
+		sort(map, map + m, cmp);
+		krusal();
 	}
 }
