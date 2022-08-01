@@ -15,6 +15,7 @@
  *
  * 心得体会 （可选）：
  */
+方法1——prime算法
 #include<iostream>
 #include<cstring>
 using namespace std;
@@ -71,4 +72,52 @@ int main()
 		prim();
 	}
 
+}
+方法2——krusal
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int N = 3000;
+struct node {
+	int from;
+	int to;
+	int weight;
+}map[N];
+int pre[55];
+int n,m,ans;
+bool cmp(node a, node b)
+{
+	return a.weight < b.weight;
+}
+int finds(int x)
+{
+	return pre[x] == x ? x : finds(pre[x]);
+}
+void krusal()
+{
+	int ans = 0;
+	sort(map, map + m, cmp);
+	for (int i = 0; i <= n; i++)
+		pre[i] = i;
+	for (int i = 0; i < m; i++)
+	{
+		int from = finds(map[i].from);
+		int to = finds(map[i].to);
+		if (from != to)
+		{
+			pre[from] = to;
+			ans += map[i].weight;
+		}
+	}
+	cout << ans << endl;
+}
+int main()
+{
+	while (cin >> n && n)
+	{
+		cin >> m;
+		for (int i = 0; i < m; i++)
+			cin >> map[i].from >> map[i].to >> map[i].weight;
+		krusal();
+	}
 }
