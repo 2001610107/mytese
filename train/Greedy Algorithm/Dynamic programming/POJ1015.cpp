@@ -1,3 +1,28 @@
+/* 
+ * 问题描述：有n个人，每个人有一个D值和P值，求选出m个人，使得|∑(D)-∑(P)|最小，如果最小值相同，则选择|∑(D)+∑(P)|较大的，输出选出的人和∑(D)，∑(P)
+。
+ *
+ * 提交状态： AC
+ *
+ * AC 结果： Memory: 1312K Time:94 MS
+ *
+* 解题方法1：，动态规划:
+dp[i][j] 代表选第i个，选择的D[]和与P[]和差为j的 最大总和。
+path[i][j] 记录前i个选择的组。
+Sub[i] = D[i]-P[i];
+Pus[i] = D[i]+P[i];
+如果选择的前i组和差无法达到j，那么dp[i][j] = -1;
+if(k 前面有路径 && k 在前面的路径上没有出现)
+ dp[i+1][j+sub[k]] = max(dp[i+1][j+sub[k]],dp[i][j]+pus[k]);
+ *
+ * 解题方法2 （可选）
+ *
+ * 出错次数：12
+ *
+ * 错误原因 （可选）：
+ *
+ * 心得体会 （可选）：
+ */
 
 /*#include<iostream>
 #include<algorithm>
@@ -14,7 +39,7 @@ int main()
 	vector<int>path[21][801];
 	while (~scanf_s("%d%d", &n, &m) && n && m)
 	{
-		for (int i = 0; i < m; ++i) //���
+		for (int i = 0; i < m; ++i) //Çå¿Õ
 			for (int j = 0; j < 801; ++j)
 				path[i][j].clear();
 		memset(dp, -1, sizeof(dp));
