@@ -1,19 +1,19 @@
 /*
- * ÎÊÌâÃèÊö£º°ÑmÖÖÊý×ÖÌîÈën¸öÎ»ÖÃ£¬ÓÐ¶àÉÙÖÖ·½·¨£¬ÇómÎª1µ½nµÄÇé¿öÊýµÄ×ÜºÍ
+ * é—®é¢˜æè¿°ï¼šæŠŠmç§æ•°å­—å¡«å…¥nä¸ªä½ç½®ï¼Œæœ‰å¤šå°‘ç§æ–¹æ³•ï¼Œæ±‚mä¸º1åˆ°nçš„æƒ…å†µæ•°çš„æ€»å’Œ
  *
- * Ìá½»×´Ì¬£º AC / WA / TLE / ...
+ * æäº¤çŠ¶æ€ï¼š AC .
  *
- * AC ½á¹û£º Memory: 160K Time: 1110MS
+ * AC ç»“æžœï¼š Memory: 336K Time: 0MS
  *
- * ½âÌâ·½·¨1£ºdp[i][j]±íÊ¾i¸öÎ»ÖÃjÖÖÊý×Ö£¬ÄÇÃ´dp[i][j] = dp[i - 1][j] * j + dp[i][j - 1];
+ * è§£é¢˜æ–¹æ³•1ï¼šdp[i][j]è¡¨ç¤ºiä¸ªä½ç½®jç§æ•°å­—ï¼Œé‚£ä¹ˆdp[i][j] = dp[i - 1][j] * j + dp[i][j - 1];
  *
- * ½âÌâ·½·¨2 £¨¿ÉÑ¡£©£º
+ * è§£é¢˜æ–¹æ³•2 ï¼ˆå¯é€‰ï¼‰ï¼š
  *
- * ³ö´í´ÎÊý£º0
+ * å‡ºé”™æ¬¡æ•°ï¼š6
  *
- * ´íÎóÔ­Òò £¨¿ÉÑ¡£©£º
+ * é”™è¯¯åŽŸå›  ï¼ˆå¯é€‰ï¼‰ï¼š
  *
- * ÐÄµÃÌå»á £¨¿ÉÑ¡£©£º
+ * å¿ƒå¾—ä½“ä¼š ï¼ˆå¯é€‰ï¼‰ï¼š
  */
 
 #include<iostream>
@@ -69,11 +69,11 @@ int main()
 	for (int i = 2; i < N; i++)
 		f[i] = f[i - 1] + f[i - 2];
 	cin >> n;
-	cout << "¶¯Ì¬¹æ»®£º";
+	cout << "åŠ¨æ€è§„åˆ’ï¼š";
 	for (int i = 0; i < n; i++)
 		cout << f[i] << ' ';
 	puts("");
-	cout << "µÝ¹éÊ½£º";
+	cout << "é€’å½’å¼ï¼š";
 	for (int i = 1; i <= n; i++)
 		cout << solve(i) << ' ';
 	puts("");
