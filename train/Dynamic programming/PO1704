@@ -1,0 +1,54 @@
+/*
+
+问题描述：   给一个1*M的棋盘，上面有N颗棋子，每人每次只能向左移动一颗棋子，并且至少移动一步，两人轮流操作，如果某人不能移动棋子了，那他就输了
+
+提交状态：AC 
+
+
+AC结果： Memory: 260K Time:0 MS
+
+
+解题方法：将棋子分成两两一组，如果棋子数是奇数，前面补0。如果先手移动的是一组当中左边的棋子，那么后手只要将该组右边的棋子移动相同的步数，就行了；
+如果先手移动的是右边的棋子，将棋子分组后，两两棋子之间的距离为L1，L2，L3，……，Ln，则L1^L2^L3^……^Ln=0时，Bob赢，否则，Georgia赢。
+
+出错次数：12
+
+错误原因：
+
+*/
+
+
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+using namespace std;
+
+const int maxn=1005;
+
+int main()
+{
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        int N,p[maxn];
+        cin>>N;
+        for(int i=1;i<=N;i++)
+            cin>>p[i];
+        sort(p+1,p+1+N);
+        int res=0,j=1;
+        if(N%2==1)
+        {
+            res=p[1]-1;
+            j++;
+        }
+        for(int i=j;i<=N;i+=2)
+        {
+            res^=p[i+1]-p[i]-1;
+        }
+        if(res==0)
+           puts("Bob will win");
+        else 
+            puts("Georgia will win");
+    }
+}
